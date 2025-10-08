@@ -1,0 +1,102 @@
+# ============================
+# Python / FastAPI / LangChain Project
+# ============================
+
+# --- Python cache & bytecode ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Environment variables ---
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# --- IDE settings ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- OS / system files ---
+.DS_Store
+Thumbs.db
+
+# --- Logs & debug outputs ---
+*.log
+*.out
+*.err
+logs/
+tmp/
+*.pid
+
+# --- Test / coverage outputs ---
+.coverage
+htmlcov/
+.tox/
+pytest_cache/
+nosetests.xml
+coverage.xml
+test-results/
+tests/__pycache__/
+
+# --- Build / package artifacts ---
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# --- Notebooks ---
+*.ipynb_checkpoints
+
+# --- Docker / Compose ---
+*.pid
+*.tar
+*.log
+docker-compose.override.yml
+
+# --- Supabase / credentials ---
+.supabase/
+supabase/.temp/
+
+# --- Vector DB data ---
+chroma/
+chroma_data/
+faiss_index/
+db_data/
+data/vector_store/
+
+# --- Cache / experiment files ---
+wandb/
+weights/
+outputs/
+runs/
+checkpoints/
+artifacts/
+mlruns/
+*.pt
+*.pth
+
+# --- Node / frontend (if added later) ---
+node_modules/
+package-lock.json
+yarn.lock
+npm-debug.log
+dist/
+.next/
+build/
+
+# --- Temporary or local data ---
+data/
+datasets/
+notebooks/
+sandbox/
