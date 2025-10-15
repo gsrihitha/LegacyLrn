@@ -12,5 +12,5 @@ fake_db = []
 
 @router.post("/register")
 def register_user(user: User):
-    fake_db.append(user.dict())
+    fake_db.append(user.model_dump())
     return {"message": "User registered", "user": user}

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import students, mentors
+from app.routes import students, mentors, match, feedbackk
 from app.core.config import settings
 
 app = FastAPI(
@@ -10,7 +10,11 @@ app = FastAPI(
 
 app.include_router(students.router, prefix="/api/students", tags=["Students"])
 app.include_router(mentors.router, prefix="/api/mentors", tags=["Mentors"])
+app.include_router(match.router, prefix="/api/match", tags=["Match"])
+app.include_router(feedbackk.router, prefix="/api/feedback", tags=["Feedback"])
 
-@app.get("/ping")
-def ping():
-    return {"message": "pong", "debug": settings.DEBUG}
+
+
+# @app.get("/ping")
+# def ping():
+#     return {"message": "pong", "debug": settings.DEBUG}
