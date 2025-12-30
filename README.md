@@ -43,6 +43,7 @@ Fill in `SUPABASE_URL`, `SUPABASE_KEY`, and `OPENAI_API_KEY` in `.env`.
 uvicorn app.main:app --reload --port 8000
 ```
 
+<<<<<<< HEAD
 ### Frontend
 ```bash
 cd frontend
@@ -61,3 +62,8 @@ npm run dev
 - Mentor availability and calendar sync
 - Advanced RAG: reranking, citations, and grounded explanations
 - Analytics dashboard for mentor performance and student outcomes
+=======
+
+
+
+>>>>>>> ea5cad794f73868afc826b3a5a972bdc0389b6ee
