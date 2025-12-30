@@ -11,7 +11,7 @@ LegacyLearn is a mentorship platform that connects retired professionals with st
 - Feedback submission on match results (FastAPI + Supabase/PostgreSQL)
 - JWT-based access tokens for login sessions (FastAPI + PyJWT)
 
-## Current Scope
+### Current Scope
 This project was built to learn how RAG works in a real product flow and to understand how vector search plus LLM summaries can improve matching.
 
 ## Tech stack
@@ -19,7 +19,7 @@ This project was built to learn how RAG works in a real product flow and to unde
 - Data: Supabase/PostgreSQL
 - AI matching: lightweight RAG using LangChain, Chroma vector store, Hugging Face sentence-transformer embeddings, OpenAI (optional)
 - Auth: JWT tokens with PyJWT
-- Frontend: React, Vite, Tailwind CSS, Axios
+- Frontend: React, Vite, Tailwind CSS
 
 ## Installation and usage
 ### Backend
@@ -62,8 +62,3 @@ npm run dev
 - Mentor availability and calendar sync
 - Advanced RAG: reranking, citations, and grounded explanations
 - Analytics dashboard for mentor performance and student outcomes
-=======
-
-
-
->>>>>>> ea5cad794f73868afc826b3a5a972bdc0389b6ee
