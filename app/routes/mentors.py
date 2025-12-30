@@ -13,11 +13,11 @@ def register_mentor(mentor: MentorCreate):
     return{"message": "Mentor registration"}
 
 @router.post("/login")
-def login_menor(email: str, password: str):
+def login_mentor(email: str, password: str):
     res = supabase.table("mentors").select("*").eq("email", email).execute()
     if not res.data:
         raise HTTPException(status_code=404, detail="User not found")
-    user = res.data
+    user = res.data[0]
     if not verify_password(password, user["password"]):
         raise HTTPException(status_code=400, detail="Wrong password")
     token = create_access_token({"sub":user["email"], "role": "mentor"})

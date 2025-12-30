@@ -1,56 +1,63 @@
 # LegacyLearn
-## About the app:
-LegacyLearn is a mentorship platform that connects retired professionals with students seeking to learn new skills. Retirees can share their experience, earn income, and stay socially active, while students benefit from personalized, one-on-one guidance that goes beyond self-learning through videos or courses.
 
-The system provides secure profile verification, AI-driven mentor recommendations, and a safe booking flow. Students can request a session after reviewing a mentor’s skills and hourly rate; mentors can review the student’s profile before accepting. Once confirmed, the class can take place online (via recorded video calls) or in-person (with safeguards such as verified profiles and optional session recordings).
+## About the app
+LegacyLearn is a mentorship platform that connects retired professionals with students seeking to learn new skills. It supports mentor discovery, AI-assisted matching, and feedback so learners can find the right guide quickly.
 
-## Key features include:
+## Features
+- Student and mentor onboarding with profile data (FastAPI + Supabase/PostgreSQL)
+- Lightweight RAG pipeline for AI-driven mentor matching (LangChain + Chroma + sentence-transformers + OpenAI)
+- Student dashboard to search and review recommended mentors (React + Vite + Tailwind)
+- Mentor dashboard to refresh profile embeddings (FastAPI endpoint + Chroma persistence)
+- Feedback submission on match results (FastAPI + Supabase/PostgreSQL)
+- JWT-based access tokens for login sessions (FastAPI + PyJWT)
 
-1. Verified onboarding for both students and mentors.
+## Current Scope
+This project was built to learn how RAG works in a real product flow and to understand how vector search plus LLM summaries can improve matching.
 
-2. AI-powered skill matching using vector similarity + LLM explanations.
+## Tech stack
+- Backend: FastAPI, Pydantic, Uvicorn
+- Data: Supabase/PostgreSQL
+- AI matching: lightweight RAG using LangChain, Chroma vector store, Hugging Face sentence-transformer embeddings, OpenAI (optional)
+- Auth: JWT tokens with PyJWT
+- Frontend: React, Vite, Tailwind CSS, Axios
 
-3. Secure online payments through Stripe (test mode in MVP).
+## Installation and usage
+### Backend
+1) Create and activate a virtual environment:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+2) Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+3) Configure environment:
+```bash
+cp .env.example .env
+```
+Fill in `SUPABASE_URL`, `SUPABASE_KEY`, and `OPENAI_API_KEY` in `.env`.
 
-4. Recorded sessions for accountability (online via Jitsi, offline via uploaded recordings).
+4) Run the API:
+```bash
+uvicorn app.main:app --reload --port 8000
+```
 
-5. Mutual acceptance workflow — bookings happen only if both sides agree.
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
+### Usage notes
+- The frontend currently auto-seeds a dev user to bypass login. Update `frontend/src/context/AuthContext.jsx` if you want real auth.
+- If you add or update mentors, call `POST /api/match/refresh` once to rebuild embeddings.
+- Matching endpoint: `GET /api/match?query=your+learning+goal`
 
-## Architecture:
-User ─▶ FastAPI backend (auth + matchmaking API)
-          ├── Supabase/PostgreSQL → user & skill data
-          ├── Chroma / FAISS → semantic vector store
-          ├── LangChain + LLM → skill-based recommendations (Day 3)
-          ├── W&B / Triton (later) → model tracking + inference
-Frontend ─▶ Streamlit / React (optional)
-
-## Repo-structure (current):
-legacylearn/
-│
-├── app/
-│   ├── main.py                  # FastAPI entry
-│   ├── core/
-│   │   ├── config.py            # Load env vars
-│   │   └── db.py                # DB connection (Supabase/Postgres)
-│   ├── models/
-│   │   ├── user.py              # Pydantic models / ORM schemas
-│   │   └── skill.py
-│   ├── routes/
-│   │   ├── users.py             # Registration/login APIs
-│   │   ├── mentors.py
-│   │   └── students.py
-│   ├── utils/
-│   │   └── seed_data.py         # Dummy profiles
-│   └── __init__.py
-│
-├── tests/
-│   └── test_basic.py
-│
-├── .env                         # Local secrets
-├── .env.example
-├── requirements.txt
-├── README.md
-└── .gitignore
-
-
+## Future prospect
+- Real auth with role-based access control
+- Payments and scheduling workflows
+- Mentor availability and calendar sync
+- Advanced RAG: reranking, citations, and grounded explanations
+- Analytics dashboard for mentor performance and student outcomes

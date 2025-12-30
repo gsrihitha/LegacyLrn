@@ -1,8 +1,7 @@
 from app.core.embeddings import vector_store
 from app.core.db import supabase
 from langchain_community.llms import OpenAI
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
+from langchain_core.prompts import PromptTemplate
 import os
 
 # if you use OpenAI / Gemini / Ollama adjust here
@@ -27,10 +26,9 @@ def recommend_mentors(student_query: str):
     Mentors: {mentors}
     Pick the best matches and explain why briefly."""
     prompt = PromptTemplate(input_variables=["query", "mentors"], template=template)
-    chain = LLMChain(llm=llm, prompt=prompt)
-
     mentor_text = "\n".join([f"{m.metadata['name']} ({m.metadata['skill']})" for m in similar])
-    response = chain.run(query=student_query, mentors=mentor_text)
+    formatted = prompt.format(query=student_query, mentors=mentor_text)
+    response = llm.invoke(formatted)
 
     # Sanitize output before returning
     safe_matches = []
@@ -38,12 +36,14 @@ def recommend_mentors(student_query: str):
         m = doc.metadata
         safe_matches.append({
             "name": m.get("name"),
+            "email": m.get("email"),
             "skill": m.get("skill"),
             "years_experience": m.get("years_experience"),
             "mode": m.get("mode"),
+            "hourly_rate": m.get("hourly_rate"),
+            "location": m.get("location"),
         })
 
     return {"matches": safe_matches, "summary": response}
 
     
-
