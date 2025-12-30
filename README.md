@@ -43,7 +43,6 @@ Fill in `SUPABASE_URL`, `SUPABASE_KEY`, and `OPENAI_API_KEY` in `.env`.
 uvicorn app.main:app --reload --port 8000
 ```
 
-<<<<<<< HEAD
 ### Frontend
 ```bash
 cd frontend
